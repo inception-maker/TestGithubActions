@@ -10,4 +10,16 @@ jobs:
         run: |
           node -v
           npm -v
-          
+  parallel-job-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Show macos SW version
+        run: sw_vers
+  dependent-job-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Echo a string
+        run: Write-Output "Windows String"
+      - name: Failing step
+        run: somekindofrubish
+        
