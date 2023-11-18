@@ -21,5 +21,4 @@ jobs:
     steps:
       - name: Echo a string
         run: Write-Output "Windows String"
-      - name: Failing step
-        run: somekindofrubish
+        
