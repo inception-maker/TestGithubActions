@@ -17,9 +17,9 @@ jobs:
         run: sw_vers
   dependent-job-windows:
     runs-on: windows-latest
+    needs: run-shell-commands
     steps:
       - name: Echo a string
         run: Write-Output "Windows String"
       - name: Failing step
         run: somekindofrubish
-        
