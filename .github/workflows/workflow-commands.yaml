@@ -8,13 +8,13 @@ jobs:
       - name: Show error message
         run: echo "::error::This is just a plain error"
       - name: Error message with param
-        run: echo "::error title=Error Title,file=app.js,line=2,endLine=5,column=5,endColum=8::Error message with param"
+        run: echo "::error title=Error Title,file=app.js,line=2,endLine=2,col=5,endColumn=8::Error message with param"
       - name: Debug message with param
-        run: echo "::debug title=Debug Title,file=app.js,line=2,endLine=5,column=5,endColum=8::Debug message with param"
+        run: echo "::debug title=Debug Title,file=app.js,line=2,endLine=2,col=5,endColumn=8::Debug message with param"
       - name: Warning message with param
-        run: echo "::warning title=Warning Title,file=app.js,line=2,endLine=5,column=5,endColum=8::Warning message with param"
+        run: echo "::warning title=Warning Title,file=app.js,line=2,endLine=2,col=5,endColumn=8::Warning message with param"
       - name: Notice message with param
-        run: echo "::notice title=Notice Title,file=app.js,line=2,endLine=5,column=5,endColum=8::Notice message with param"
+        run: echo "::notice title=Notice Title,file=app.js,line=2,endLine=2,col=5,endColumn=8::Notice message with param"
       - name: Group of logs
         run: |
           echo "::group::My group title"
