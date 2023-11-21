@@ -30,4 +30,4 @@ jobs:
           echo $PR_URL
           echo ${{ github.event.pull_request.html_url }}
           gh pr list  
-          gh pr edit $PR_URL --add-label mylabel
+          gh pr comment $PR_URL --body "mylabel"
