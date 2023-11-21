@@ -1,6 +1,6 @@
 name: Repository events
 on:
-  push:
+  # push:
   pull_request: 
     types: [opened, closed, reopened, assigned]
   issues: 
@@ -20,9 +20,14 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       PR_URL: ${{ github.event.pull_request.html_url }}
 
+    permissions: 
+      pull-requests: write
+      
     steps:
       - uses: actions/checkout@v4
       - run: |
-          echo "Hello world"
+          echo "Hello world"    
+          echo $PR_URL
           echo ${{ github.event.pull_request.html_url }}
-          gh pr list      
+          gh pr list  
+          gh pr edit $PR_URL --add-label mylabel
