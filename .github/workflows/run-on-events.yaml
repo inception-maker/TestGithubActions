@@ -13,5 +13,10 @@ jobs:
       - run: |
           echo $GITHUB_SHA
           echo $GITHUB_REF
-      - uses: actions/checkout@v4
-      
+  another-job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Hello world"
+          echo ${{github.event.pull_request.labels}}
+          
