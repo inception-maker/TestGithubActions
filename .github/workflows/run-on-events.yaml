@@ -7,12 +7,12 @@ on:
     types: [opened, reopened]
 
 jobs:
-  test-repository-event-triggering:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo $GITHUB_SHA
-          echo $GITHUB_REF
+  # test-repository-event-triggering:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: |
+  #         echo $GITHUB_SHA
+  #         echo $GITHUB_REF
   another-job:
     runs-on: ubuntu-latest
     env:
@@ -23,5 +23,5 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           echo "Hello world"
-          echo $PR_URL
+          echo ${{ github.event.pull_request.html_url }}
           gh pr edit $PR_URL --add-label mylabel        
