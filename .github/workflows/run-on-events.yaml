@@ -23,4 +23,5 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           echo "Hello world"
+          echo $PR_URL
           gh pr edit $PR_URL --add-label mylabel        
