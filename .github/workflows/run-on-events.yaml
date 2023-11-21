@@ -13,6 +13,7 @@ jobs:
   #     - run: |
   #         echo $GITHUB_SHA
   #         echo $GITHUB_REF
+  # gh pr edit $PR_URL --add-label mylabel
   another-job:
     runs-on: ubuntu-latest
     env:
@@ -24,4 +25,4 @@ jobs:
       - run: |
           echo "Hello world"
           echo ${{ github.event.pull_request.html_url }}
-          gh pr edit $PR_URL --add-label mylabel        
+          gh pr list      
