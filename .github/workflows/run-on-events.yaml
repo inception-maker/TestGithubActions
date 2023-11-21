@@ -15,8 +15,10 @@ jobs:
           echo $GITHUB_REF
   another-job:
     runs-on: ubuntu-latest
+    env:
+      PR_URL: ${{ github.event.pull_request.html_url }}
+
     steps:
       - run: |
           echo "Hello world"
-          echo ${{github.event.pull_request.labels[0].name}}
-          
+          gh pr edit $PR_URL --add-label mylabel        
