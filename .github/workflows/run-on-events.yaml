@@ -13,6 +13,5 @@ jobs:
       - run: |
           echo $GITHUB_SHA
           echo $GITHUB_REF
-          echo ${{ secrets.GITHUB_TOKEN }} | base64 -d
       - uses: actions/checkout@v4
       
