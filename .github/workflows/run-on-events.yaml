@@ -20,6 +20,7 @@ jobs:
       PR_URL: ${{ github.event.pull_request.html_url }}
 
     steps:
+      - uses: actions/checkout@v4
       - run: |
           echo "Hello world"
           gh pr edit $PR_URL --add-label mylabel        
