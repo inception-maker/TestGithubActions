@@ -1,6 +1,6 @@
 name: Repository events
 on:
-  pull_request: 
+  pull_request_target: 
     types: [opened, closed, reopened, assigned, unassigned]
 
 jobs:
