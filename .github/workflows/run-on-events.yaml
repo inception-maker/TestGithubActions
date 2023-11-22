@@ -1,18 +1,9 @@
 name: Repository events
 on:
-  # push:
   pull_request_target: 
     types: [opened, closed, reopened, assigned]
 
 jobs:
-  # test-repository-event-triggering:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: |
-  #         echo $GITHUB_SHA
-  #         echo $GITHUB_REF
-  # gh pr edit $PR_URL --add-label mylabel
-
   edit-pr-add-label:
     runs-on: ubuntu-latest
     env:
@@ -21,6 +12,7 @@ jobs:
 
     permissions: 
       pull-requests: write
+      id-token: write
       
     steps:
       - run: |
