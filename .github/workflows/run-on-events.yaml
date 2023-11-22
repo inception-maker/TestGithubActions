@@ -1,7 +1,7 @@
 name: Repository events
 on:
   pull_request: 
-    types: [opened, closed, reopened, assigned]
+    types: [opened, closed, reopened, assigned, unassigned]
 
 jobs:
   edit-pr-add-label:
