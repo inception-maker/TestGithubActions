@@ -14,3 +14,6 @@ jobs:
           days-before-pr-stale: 1
           days-before-pr-close: 5
           
+    permissions:
+      pull-requests: write
+      
