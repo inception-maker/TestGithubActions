@@ -6,7 +6,7 @@ on:
       - "feat/**"
       - "!feat/feat-a"
     paths:
-      - "**.txt"
+      - "*.txt"
     tags-ignore:
       - v5
 
