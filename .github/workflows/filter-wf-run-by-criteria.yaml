@@ -5,8 +5,8 @@ on:
       - main
       - "feat/**"
       - "!feat/feat-a"
-    paths-ignore:
-      - "**.js"
+    paths:
+      - "**.txt"
     tags-ignore:
       - v5
 
