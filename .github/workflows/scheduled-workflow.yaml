@@ -1,8 +1,7 @@
 name: Scheduled wf to mark stale issues & PRs
 on:
   schedule:
-    - cron: "*/3 * * * *"
-    - cron: "*/2 * * * *"
+    - cron: '0/1 * * * *'
 
 jobs:
   mark-pr-stale:
