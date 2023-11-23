@@ -1,0 +1,10 @@
+name: WF triggered by other WF
+on:
+  workflow_run:
+    workflows: [Repository events]
+    types: completed
+jobs:
+  just-echo-hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello World, triggered by other workflow"
