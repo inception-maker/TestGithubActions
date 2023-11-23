@@ -1,0 +1,27 @@
+name: Expression & Context
+on: [push, issues]
+run-name: Running expression & context triggered by @${{ github.triggering_actor }} on ${{ github.event_name }} event
+
+jobs:
+  expressions-and-contexts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: evaluate expressions
+        id: evaluate-expression
+        run: |
+          echo ${{ 25 }}
+          echo ${{ 'Hello world' }}
+          echo ${{ null }}
+          echo ${{ true }}
+          echo ${{ 1 > 2 }}
+          echo ${{ true && false }}
+          echo ${{ true || (true && false) }}
+          echo ${{ 'string' == 'StrinG' }}
+
+      - name: dump context data
+        run: |
+          echo '${{ toJson(github) }}'
+          echo '${{ toJson(steps) }}'
+          echo '${{ toJson(secrets) }}'
+          echo '${{ toJson(job) }}'
+          echo '${{ toJson(runner) }}'
