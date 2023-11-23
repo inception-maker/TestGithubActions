@@ -1,0 +1,44 @@
+name: Manually trigger workflow
+on:
+  workflow_dispatch:
+    inputs:
+      text-input:
+        type: string
+        default: Enter a text
+        required: true
+        description: Enter some text
+      number-input:
+        type: number
+        required: true
+        default: 5
+        description: Enter a number
+      dropdown-selection:
+        type: choice
+        default: Noman
+        required: false
+        options:
+          - Mamun
+          - Masum
+          - Noman
+        description: Select the name of the child
+      radio-button:
+        type: boolean
+        required: false
+        description: A boolean option
+      environment-selection:
+        type: environment
+        required: true
+        description: Select an environment
+
+jobs:
+  print-the-provided-input:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello world"
+      - name: print provided input to console
+        run: |
+          echo "String: ${{inputs.text-input}}"
+          echo "Number: ${{inputs.number-input}}"
+          echo "dropdown: ${{inputs.dropdown-selection}}"
+          echo "Radio: ${{inputs.radio-button}}"
+          echo "Environment: ${{inputs.environment-selection}}"
