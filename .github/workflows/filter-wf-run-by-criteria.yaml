@@ -1,0 +1,17 @@
+name: Run WF when all filters are passed
+on: 
+  push:
+    branches:
+      - main
+      - "feat/**"
+      - "!feat/feat-a"
+    paths-ignore:
+      - "**.js"
+    tags-ignore:
+      - v5
+
+jobs:
+  simple-echo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Workflow ran after all filters were satisfied"

@@ -1,8 +1,11 @@
 name: WF triggered by other WF
 on:
   workflow_run:
-    workflows: [Repository events]
+    workflows: [Run WF when all filters are passed]
     types: completed
+    branches:
+      - main
+
 jobs:
   just-echo-hello-world:
     runs-on: ubuntu-latest
