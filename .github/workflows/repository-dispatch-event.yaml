@@ -1,0 +1,13 @@
+name: Repository Dispatch
+on:
+  repository_dispatch:
+    types: [build, test]
+
+jobs:
+  echo-client-payload:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "print client payload"
+          echo "Provided environment: ${{ github.event.client_payload.env }}"
+          
