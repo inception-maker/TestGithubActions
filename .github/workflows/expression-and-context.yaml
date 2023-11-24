@@ -1,9 +1,18 @@
 name: Expression & Context
-on: [push, issues]
+on: [push, issues, pull_request]
 run-name: Running expression & context triggered by @${{ github.triggering_actor }} on ${{ github.event_name }} event
 
 jobs:
+  runs-on-issues-and-prs:
+    if: contains(fromJson('["issues", "pull_requests"]'), github.event_name)
+    runs-on: ubuntu-latest
+    steps:
+      - name: show all labels
+        if: contains(github.event.issue.labels.*.name, 'bug')
+        run: ${{ join(github.event.issue.labels.*.name, ', ') }}
+
   expressions-and-contexts:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: evaluate expressions
