@@ -1,0 +1,41 @@
+name: Status check
+on: [push]
+
+jobs:
+  job-1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: just sleep
+        id: step-1
+        run: sleep 10
+      - name: fail this job if cancelled
+        id: step-2
+        if: cancelled()
+        run: exit 1
+      - name: run if step-1 failed
+        if: failure() && steps.step-1.conclusion == 'failure'
+        run: echo "This step should never run, because step-1 never fails"
+      - name: run on step-2 failure
+        if: failure() && steps.step-2.conclusion == 'failure'
+        run: echo 'ran because step-2 failed'
+      - name: run on any failure
+        if: failure()
+        run: echo 'runs on any failure in any previous step'
+      - name: run on success
+        if: success()
+        run: echo 'runs on all previous success, which means the job was not cancelled'
+      - name: run on cancel
+        if: cancelled()
+        run: echo 'runs whenever the job is cancelled'
+      - name: always run this step
+        if: always()
+        run: echo 'this step will always run regardless failure, success, cancelled'
+      - name: runs when not cancelled
+        if: ${{ !cancelled() }}
+        run: echo "This step is running because the job was not cancelled, regardless of any success or failure"
+  job-2:
+    needs: job-1
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job-1 failed, thats why running job-2"
