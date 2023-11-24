@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: show all labels
         if: contains(github.event.issue.labels.*.name, 'bug')
-        run: ${{ join(github.event.issue.labels.*.name, ', ') }}
+        run: echo ${{ join(github.event.issue.labels.*.name, ', ') }}
 
   expressions-and-contexts:
     if: github.event_name == 'push'
