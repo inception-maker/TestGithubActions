@@ -1,0 +1,37 @@
+name: Environment vars different level
+on:
+  - push
+env:
+  WF_LEVEL: This env is from workflow level
+
+jobs:
+  job-1:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    env: 
+      JOB_LEVEL: This env is from job level
+    steps:
+      - name: log github ref
+        run: |
+          echo $GITHUB_REF
+          echo 'github ref from context: ${{ github.ref }}'
+      - name: log all level custom env
+        env:
+          STEP_LEVEL: This env is from step level
+        run: |
+          echo '${{ env.WF_LEVEL }}'
+          echo '${{ env.JOB_LEVEL }}'
+          echo '${{ env.STEP_LEVEL }}'
+      - name: log wf and job level custom env
+        run: |
+          echo '${{ env.WF_LEVEL }}'
+          echo '${{ env.JOB_LEVEL }}'
+          echo 'Not shown: ${{ env.STEP_LEVEL }}'
+  job-2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: only wf level env
+        run: |
+          echo '${{ env.WF_LEVEL }}'
+          echo 'Not shown: ${{ env.JOB_LEVEL }}'
+          echo 'Not shown: ${{ env.STEP_LEVEL }}'
