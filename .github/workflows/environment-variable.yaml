@@ -13,25 +13,42 @@ jobs:
     steps:
       - name: log github ref
         run: |
-          echo $GITHUB_REF
+          echo 'github ref from env var: $GITHUB_REF'
           echo 'github ref from context: ${{ github.ref }}'
+          echo $GITHUB_ENV
+          echo EOF
+      - name: set dynamic env var
+        run: |
+          echo 'ENV_DATE=$(date)' >> '$GITHUB_ENV'
+          echo 'ENV_RANDOM=$RANDOM' >> '$GITHUB_ENV'
+      - name: set multiline dynamic env var
+        run: |
+          {
+            echo 'ENV_RAND_JOKE<<EOF'
+            curl -s https://icanhazdadjoke.com/
+            echo EOF
+          } >> '$GITHUB_ENV'
+
       - name: log all level custom env
         env:
           STEP_LEVEL: This env is from step level
         run: |
-          echo '${{ env.WF_LEVEL }}'
-          echo '${{ env.JOB_LEVEL }}'
-          echo '${{ env.STEP_LEVEL }}'
+          echo $WF_LEVEL
+          echo $JOB_LEVEL
+          echo $STEP_LEVEL
+          echo $ENV_DATE
+          echo $ENV_RANDOM
+          echo $ENV_RAND_JOKE
       - name: log wf and job level custom env
         run: |
-          echo '${{ env.WF_LEVEL }}'
-          echo '${{ env.JOB_LEVEL }}'
-          echo 'Not shown: ${{ env.STEP_LEVEL }}'
+          echo $WF_LEVEL
+          echo $JOB_LEVEL
+          echo 'Not shown: $STEP_LEVEL'
   job-2:
     runs-on: ubuntu-latest
     steps:
       - name: only wf level env
         run: |
-          echo '${{ env.WF_LEVEL }}'
-          echo 'Not shown: ${{ env.JOB_LEVEL }}'
-          echo 'Not shown: ${{ env.STEP_LEVEL }}'
+          echo $WF_LEVEL
+          echo 'Not shown: $JOB_LEVEL'
+          echo 'Not shown: $STEP_LEVEL'
