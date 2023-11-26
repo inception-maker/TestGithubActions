@@ -27,6 +27,7 @@ jobs:
           {
             echo "ENV_RAND_JOKE<<$DELIMITER"
             curl -s https://icanhazdadjoke.com/
+            echo ""
             echo $DELIMITER
           } >> "$GITHUB_ENV"
 
