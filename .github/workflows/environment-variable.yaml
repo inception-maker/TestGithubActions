@@ -13,13 +13,13 @@ jobs:
     steps:
       - name: log github ref
         run: |
-          echo 'github ref from env var: $GITHUB_REF'
+          echo "github ref from env var: $GITHUB_REF"
           echo 'github ref from context: ${{ github.ref }}'
           echo $GITHUB_ENV
           echo EOF
       - name: set dynamic env var
         run: |
-          echo 'ENV_DATE=$(date)' >> '$GITHUB_ENV'
+          echo "ENV_DATE=$(date)" >> "$GITHUB_ENV"
           echo 'ENV_RANDOM=$RANDOM' >> '$GITHUB_ENV'
       - name: set multiline dynamic env var
         run: |
