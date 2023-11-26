@@ -23,10 +23,11 @@ jobs:
           echo "ENV_RANDOM=$RANDOM" >> "$GITHUB_ENV"
       - name: set multiline dynamic env var
         run: |
+          DELIMITER=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
           {
-            echo 'ENV_RAND_JOKE<<EOF'
+            echo "ENV_RAND_JOKE<<DELIMITER"
             curl -s https://icanhazdadjoke.com/
-            echo EOF
+            echo DELIMITER
           } >> "$GITHUB_ENV"
 
       - name: log all level custom env
