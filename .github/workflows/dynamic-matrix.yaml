@@ -20,10 +20,10 @@ jobs:
         with:
           result-encoding: json
           script: |
-            return '{
+            "return {
               "os": context.payload.inputs["os"],
               "node-version": context.payload.inputs["node-version"]
-            }'
+            }"
       - run: echo "output from scripter= ${{ fromJson(steps.scripter.outputs.result) }}"
       - run: echo "step-output=value" >> $GITHUB_OUTPUT
         id: step-1
