@@ -47,11 +47,9 @@ jobs:
             node-version-selector: 18
           # should add a new column to all original rows: {os: ubuntu-latest, node: 14, architecture: Arch64}
           - architecture: Arch64
-        exclude:
+        exclude: # Firstly no random key can't be used in exclude, the key name must exist in original matrix
           # should not have any effect since the original array didn't have node-version: 17
           - node-version-selector: 17
-          # should not have any effect since neither original nor resulted matrix has the key
-          - random: random
           # should remove 2 row: {os: ubuntu-latest, node:15}, {os: windows-latest, node:15}
           - node-version-selector: 15
           # should remove 1 row from original: {os: ubuntu-latest, node:14}
