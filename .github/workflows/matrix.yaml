@@ -58,7 +58,7 @@ jobs:
     runs-on: ${{ matrix.os-selector }}
     steps:
       - name: stop all jobs when fails
-        if: matrix.experimental == 'true'
+        if: matrix.experimental == true
         run: exit 1
       - run: node -v
       - name: display matrix
