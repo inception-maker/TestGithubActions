@@ -1,6 +1,5 @@
 name: Dynamic Matrix
 on:
-  push:
   workflow_dispatch:
     inputs:
       os:
