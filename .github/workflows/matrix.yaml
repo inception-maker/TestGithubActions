@@ -1,6 +1,22 @@
 name: Running a job multiple time using Matrix
 on: [push]
 
+# Original matrix
+# {os: ubuntu-latest, node: 14}
+# {os: ubuntu-latest, node: 15}
+# {os: ubuntu-latest, node: 16}
+# {os: windows-latest, node: 14}
+# {os: windows-latest, node: 15}
+# {os: windows-latest, node: 16}
+
+# Resulted matrix
+# {os: ubuntu-latest, node: 14, experimental: true, architecture: Arch64}
+# {os: windows-latest, node: 14, experimental: false, architecture: Arch64}
+# {os: windows-latest, node: 16, experimental: false, architecture: Arch64}
+# {os: ubuntu-latest, node: 17}
+# {os: ubuntu-latest, node: 18}
+# {os: macos-latest, node: 18}
+
 jobs:
   node-matrix:
     continue-on-error: true #Continues to run other jobs even if one job fails
@@ -9,6 +25,38 @@ jobs:
       matrix:
         os-selector: [ubuntu-latest, windows-latest]
         node-version-selector: [14, 15, 16]
+        include:
+          # should add a new row: {os: ubuntu-latest, node: 17}
+          - os-selector: ububtu-latest
+            node-version-selector: 17
+          # should add a new row: {os: ubuntu-latest, node: 18}
+          - os-selector: ububtu-latest
+            node-version-selector: 18
+          # original matrix should be unchanged
+          - os-selector: ubuntu-latest
+            node-version-selector: 14
+          # should extend first row: {os: ubuntu-latest, node: 14, experimental: true}
+          - os-selector: ubuntu-latest
+            node-version-selector: 14
+            experimental: true
+          # should extend row 4,5,6: {os: windows-latest, node: [14,15,16], experimental: false}
+          - os-selector: windows-latest
+            experimental: false
+          # should add a new row: {os: macos-latest, node: 18}
+          - os-selector: macos-latest
+            node-version: 18
+          # should add a new column to all original rows: {os: ubuntu-latest, node: 14, architecture: Arch64}
+          - architecture: Arch64
+        exclude:
+          # should not have any effect since the original array didn't have node-version: 17
+          - node-version: 17
+          # should not have any effect since neither original nor resulted matrix has the key
+          - random: random
+          # should remove 2 row: {os: ubuntu-latest, node:15}, {os: windows-latest, node:15}
+          - node-version: 15
+          # should remove 1 row from original: {os: ubuntu-latest, node:14}
+          - os-selector: ubuntu-latest
+            node-version: 16
     runs-on: ${{ matrix.os-selector }}
     steps:
       - run: node -v
