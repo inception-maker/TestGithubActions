@@ -19,7 +19,7 @@ jobs:
         id: scripter
         with:
           result-encoding: json
-          script: "return {'os': context.payload.inputs['os'], 'node-version': context.payload.inputs['node-version']}"
+          script: "return {'os': context.payload.inputs['os'].split(','), 'node-version': context.payload.inputs['node-version'].split(',')}"
       - run: echo "output from scripter= ${{ steps.scripter.outputs.result }}"
       - run: echo "step-output=value" >> $GITHUB_OUTPUT
         id: step-1
