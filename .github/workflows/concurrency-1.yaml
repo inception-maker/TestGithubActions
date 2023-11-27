@@ -7,7 +7,7 @@ on:
         description: Environment
         required: true
 concurrency: 
-  group: concurrent-1
+  group: ${{ inputs.environment }}
   cancel-in-progress: true
 
 jobs:
