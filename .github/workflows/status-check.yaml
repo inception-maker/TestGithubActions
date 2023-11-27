@@ -8,9 +8,10 @@ jobs:
       - name: just sleep
         id: step-1
         run: sleep 10
-      - name: fail this job if cancelled
+      - name: fail this job
         id: step-2
         run: exit 1
+        continue-on-error: true
       - name: run if step-1 failed
         if: failure() && steps.step-1.conclusion == 'failure'
         run: echo "This step should never run, because step-1 never fails"
