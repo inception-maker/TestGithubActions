@@ -1,4 +1,5 @@
 name: Concurrency-1
+run-name: running §${{github.workflow.name}} workflow for §${{inputs.environment}} environment
 on:
   workflow_dispatch:
     inputs:
