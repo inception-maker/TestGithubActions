@@ -4,11 +4,11 @@ on:
     inputs:
       os:
         type: string
-        default: data #"ubuntu-latest,macos-latest"
+        default: "ubuntu-latest,macos-latest"
         description: Runner OS
       node-version:
         type: string
-        default: data #"14,16"
+        default: "14,16"
         description: Node version
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
         with:
           result-encoding: json
           script: "return {'os': context.payload.inputs['os'], 'node-version': context.payload.inputs['node-version']}"
-      - run: echo "output from scripter= ${{ fromJson(steps.scripter.outputs.result) }}"
+      - run: echo "output from scripter= ${{ steps.scripter.outputs.result }}"
       - run: echo "step-output=value" >> $GITHUB_OUTPUT
         id: step-1
       - run: echo "step-output=value from step 2" >> $GITHUB_OUTPUT
