@@ -4,7 +4,7 @@ on:
 
 jobs:
   prepare-input:
-    runs-on: ububtu-latest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "step-output=value" >> $GITHUB_OUTPUT
         id: step-1
