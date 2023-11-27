@@ -3,7 +3,9 @@ on: [push]
 
 jobs:
   node-matrix:
+    continue-on-error: true #Continues to run other jobs even if one job fails
     strategy:
+      fail-fast: false #Default is true, which results in failing other in-progress jobs too
       matrix:
         os-selector: [ubuntu-latest, windows-latest]
         node-version-selector: [14, 15, 16]
