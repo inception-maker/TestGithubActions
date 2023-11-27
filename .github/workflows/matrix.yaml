@@ -58,6 +58,8 @@ jobs:
     runs-on: ${{ matrix.os-selector }}
     steps:
       - run: node -v
+      - name: display matrix
+        run: ${{ toJson(matrix) }}
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version-selector }}
