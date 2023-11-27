@@ -1,11 +1,26 @@
 name: Dynamic Matrix
 on:
   workflow_dispatch:
+    inputs:
+      os:
+        type: string
+        default: "ubuntu-latest,macos-latest"
+        description: Runner OS
+      node-version:
+        type: string
+        default: "14,16"
+        description: Node version
 
 jobs:
   prepare-input:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/github-script@v6
+        id: scripter
+        with:
+          script: |
+            return "Hello world from js"
+      - run: echo "output from scripter= ${{ steps.scripter.outputs.result }}"
       - run: echo "step-output=value" >> $GITHUB_OUTPUT
         id: step-1
       - run: echo "step-output=value from step 2" >> $GITHUB_OUTPUT
