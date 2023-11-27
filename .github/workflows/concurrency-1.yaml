@@ -6,7 +6,9 @@ on:
         type: environment
         description: Environment
         required: true
-concurrency: concurrent-1
+concurrency: 
+  group: concurrent-1
+  cancel-in-progress: true
 
 jobs:
   just-sleep:
