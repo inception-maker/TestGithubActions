@@ -18,9 +18,13 @@ jobs:
       - uses: actions/github-script@v6
         id: scripter
         with:
+          result-encoding: json
           script: |
-            return "Hello world from js"
-      - run: echo "output from scripter= ${{ steps.scripter.outputs.result }}"
+            return {
+              "os": context.payload.inputs['os']
+              "node-version": context.payload.inputs['node-version']
+            }
+      - run: echo "output from scripter= ${{ fromJson(steps.scripter.outputs.result) }}"
       - run: echo "step-output=value" >> $GITHUB_OUTPUT
         id: step-1
       - run: echo "step-output=value from step 2" >> $GITHUB_OUTPUT
