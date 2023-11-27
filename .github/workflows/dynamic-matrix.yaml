@@ -1,0 +1,16 @@
+name: Dynamic Matrix
+on:
+  workflow_dispatch:
+
+jobs:
+  prepare-input:
+    runs-on: ububtu-latest
+    steps:
+      - run: echo "step-output=value" >> $GITHUB_OUTPUT
+        id: step-1
+      - run: echo "step-output=value from step 2" >> $GITHUB_OUTPUT
+        id: step-2
+      - name: log the generated output from step-1 and step-2
+        run: |
+          echo "${{ steps.step-1.outputs.step-output }}"
+          echo "${{ steps.step-2.outputs.step-output }}"
