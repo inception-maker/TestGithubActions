@@ -8,7 +8,7 @@ on:
         description: Environment
         required: true
 concurrency: 
-  group: ${{ inputs.environment }}
+  group: ${{ github.workflow }}-${{ inputs.environment }}
   cancel-in-progress: true
 
 jobs:
