@@ -1,14 +1,15 @@
 name: Dynamic Matrix
 on:
+  push:
   workflow_dispatch:
     inputs:
       os:
         type: string
-        default: "ubuntu-latest,macos-latest"
+        default: data #"ubuntu-latest,macos-latest"
         description: Runner OS
       node-version:
         type: string
-        default: "14,16"
+        default: data #"14,16"
         description: Node version
 
 jobs:
@@ -19,11 +20,7 @@ jobs:
         id: scripter
         with:
           result-encoding: json
-          script: |
-            "return {
-              'os': context.payload.inputs['os'],
-              'node-version': context.payload.inputs['node-version']
-            }"
+          script: "return {'os': context.payload.inputs['os'], 'node-version': context.payload.inputs['node-version']}"
       - run: echo "output from scripter= ${{ fromJson(steps.scripter.outputs.result) }}"
       - run: echo "step-output=value" >> $GITHUB_OUTPUT
         id: step-1
