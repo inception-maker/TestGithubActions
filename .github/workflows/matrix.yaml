@@ -19,9 +19,9 @@ on: [push]
 
 jobs:
   node-matrix:
-    continue-on-error: true #Continues to run other jobs even if one job fails
+    continue-on-error: false #Continues to run other jobs even if one job fails
     strategy:
-      fail-fast: false #Default is true, which results in failing other in-progress jobs too
+      fail-fast: true #Default is true, which results in failing other in-progress jobs too
       matrix:
         os-selector: [ubuntu-latest, windows-latest]
         node-version-selector: [14, 15, 16]
@@ -57,6 +57,9 @@ jobs:
             node-version-selector: 16
     runs-on: ${{ matrix.os-selector }}
     steps:
+      - name: stop all jobs when fails
+        if: matrix.experimental == 'true'
+        run: exit 1
       - run: node -v
       - name: display matrix
         run: echo "${{ toJson(matrix) }}"
