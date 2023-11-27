@@ -19,7 +19,7 @@ on: [push]
 
 jobs:
   node-matrix:
-    continue-on-error: ${{ matrix.experimental == false }} #Continues to run other jobs even if one job fails
+    continue-on-error: ${{ matrix.experimental == 'false' }} #Continues to run other jobs even if one job fails
     strategy:
       fail-fast: false #Default is true, which results in failing other in-progress jobs too
       matrix:
