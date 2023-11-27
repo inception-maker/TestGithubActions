@@ -3,6 +3,7 @@ on: [push]
 
 jobs:
   job-1:
+    timeout-minutes: 1
     runs-on: ubuntu-latest
     steps:
       - name: just sleep
