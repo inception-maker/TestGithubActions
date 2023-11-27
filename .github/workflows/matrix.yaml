@@ -10,16 +10,16 @@ on: [push]
 # {os: windows-latest, node: 16}
 
 # Resulted matrix
-# {os: ubuntu-latest, node: 14, experimental: true, architecture: Arch64}
-# {os: windows-latest, node: 14, experimental: false, architecture: Arch64}
-# {os: windows-latest, node: 16, experimental: false, architecture: Arch64}
+# {os: ubuntu-latest, node: 14, experimental: feature, architecture: Arch64}
+# {os: windows-latest, node: 14, experimental: bug, architecture: Arch64}
+# {os: windows-latest, node: 16, experimental: bug, architecture: Arch64}
 # {os: ubuntu-latest, node: 17}
 # {os: ubuntu-latest, node: 18}
 # {os: macos-latest, node: 18}
 
 jobs:
   node-matrix:
-    continue-on-error: true #Continues to run other jobs even if one job fails
+    continue-on-error: false #Continues to run other jobs even if one job fails
     strategy:
       fail-fast: false #Default is true, which results in failing other in-progress jobs too
       matrix:
@@ -35,13 +35,13 @@ jobs:
           # original matrix should be unchanged
           - os-selector: ubuntu-latest
             node-version-selector: 14
-          # should extend first row: {os: ubuntu-latest, node: 14, experimental: true}
+          # should extend first row: {os: ubuntu-latest, node: 14, experimental: feature}
           - os-selector: ubuntu-latest
             node-version-selector: 14
-            experimental: true
-          # should extend row 4,5,6: {os: windows-latest, node: [14,15,16], experimental: false}
+            experimental: feature
+          # should extend row 4,5,6: {os: windows-latest, node: [14,15,16], experimental: bug}
           - os-selector: windows-latest
-            experimental: false
+            experimental: bug
           # should add a new row: {os: macos-latest, node: 18}
           - os-selector: macos-latest
             node-version-selector: 18
@@ -57,8 +57,7 @@ jobs:
             node-version-selector: 16
     runs-on: ${{ matrix.os-selector }}
     steps:
-      - name: stop all jobs when fails
-        if: matrix.experimental == false
+      - if: matrix.experimental == 'feature'
         run: exit 1
       - run: node -v
       - name: display matrix
