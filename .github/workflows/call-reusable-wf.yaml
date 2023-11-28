@@ -1,0 +1,17 @@
+name: Call reusable workflow
+on:
+  workflow_dispatch: 
+    inputs:
+      name:
+        type: string
+        required: false
+        default: "Abdullah Al Noman"
+        description: Enter name
+      
+jobs:
+  call-reusable-wf:
+    uses: inception-maker/reusable-wf-container/.github/workflows/reusable-workflow.yaml@main
+    with:
+      name: ${{ inputs.name }}
+    secrets: 
+      access_token: ${{ secrets.PASSPHRASE }}
