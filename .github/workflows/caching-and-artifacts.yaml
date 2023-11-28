@@ -15,7 +15,7 @@ jobs:
           path: ~/.npm
           key: npm-cache-${{hashFiles('**/package-lock.json')}}
           restore-keys: |
-            npm-cache-
+            npm-cache
       - name: display cache output
         run: echo "caching output result- ${{ toJson(steps.cache-node-modules.outputs) }}"
       - name: use axios
