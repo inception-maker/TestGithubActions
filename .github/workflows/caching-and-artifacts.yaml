@@ -8,6 +8,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: install dependencies
         run: npm install
+      - name: cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: "npm-cache"
+      - name: display cache output
+        run: echo "caching output result- ${{ toJson(steps.cache-node-modules.outputs) }}"
       - name: use axios
         uses: actions/github-script@v6
         with:
@@ -18,5 +26,4 @@ jobs:
                 'Accept': 'text/plain'
               }
             })
-            console.log(result)
-            
+            console.log(result.data)
