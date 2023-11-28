@@ -7,6 +7,12 @@ on:
         value: ${{ jobs.generate-output.outputs.date }}
 
 jobs:
+  call-reusable-wf:
+    uses: inception-maker/reusable-wf-container/.github/workflows/reusable-workflow.yaml@main
+    with:
+      name: ${{ inputs.name }}
+    secrets: 
+      access_token: ${{ secrets.PASSPHRASE }}
   generate-output:
     runs-on: ubuntu-latest
     outputs:

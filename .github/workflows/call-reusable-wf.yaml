@@ -9,18 +9,12 @@ on:
         description: Enter name
       
 jobs:
-  call-reusable-wf:
-    uses: inception-maker/reusable-wf-container/.github/workflows/reusable-workflow.yaml@main
-    with:
-      name: ${{ inputs.name }}
-    secrets: 
-      access_token: ${{ secrets.PASSPHRASE }}
   call-reusable-wf-same-repository:
     uses: ./.github/workflows/reusable-wf.yaml
+    secrets: inherit
   log-output-from-reusable-wf:
     runs-on: ubuntu-latest
     needs: call-reusable-wf-same-repository
     steps:
       - name: log output
         run: echo "${{ needs.call-reusable-wf-same-repository.outputs.date }}"
-        
