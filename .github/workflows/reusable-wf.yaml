@@ -10,7 +10,7 @@ jobs:
   call-reusable-wf:
     uses: inception-maker/reusable-wf-container/.github/workflows/reusable-workflow.yaml@main
     with:
-      name: ${{ inputs.name }}
+      name: "Abdullah"
     secrets: 
       access_token: ${{ secrets.PASSPHRASE }}
   generate-output:
