@@ -1,0 +1,20 @@
+name: Run job in docker container
+on: [workflow_dispatch]
+
+jobs:
+  docker-job:
+    runs-on: ubuntu-latest
+    container: 
+      image: node:current-alpine3.17
+      ports:
+        - 80
+      env:
+        API_URL: https://my-custom-api-url.com
+    steps:
+      - name: log node and os version
+        run: |
+          node -v
+          cat /etc/os-release
+      - name: log environment variable
+        run: echo $API_URL
+        
