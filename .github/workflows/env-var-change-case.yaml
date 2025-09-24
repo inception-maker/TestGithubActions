@@ -5,16 +5,15 @@ on:
 jobs:
   make-env-var-uppercase:
     runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT: dev
     steps:
-      - name: display current state
+      - name: export environment data
         run: |
-          echo "The environment is ${{ env.ENVIRONMENT }}"
+          export run_stage=dev
+      
+      - name: display current state
+        run: echo "The environment is $run_stage"
 
       - name: make uppercase
         shell: bash
         run: |
-          echo "test me"
-          test=$(echo "${{ env.ENVIRONMENT }}" | tr a-z A-Z)
-          echo "The environment is ${{ test }}"
+          echo "The environment is ${run_stage^^}"
