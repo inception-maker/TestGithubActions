@@ -1,0 +1,17 @@
+name: Play with changing cases of environment variables.
+on:
+  workflow_dispatch:
+
+jobs:
+  make-env-var-uppercase:
+    runs-on: ubuntu-latest
+    env:
+      ENVIRONMENT: dev
+    steps:
+      - name: display current state
+        run: |
+          echo "The environment is ${{ env.ENVIRONMENT }}"
+
+      - name: make uppercase
+        run: echo "The environment is ${{ env.ENVIRONMENT^^ }}"
+    
