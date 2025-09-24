@@ -14,5 +14,5 @@ jobs:
 
       - name: make uppercase
         run: |
-          test=$(echo ${{ENVIRONMENT}})
+          test=$(echo ${{env.ENVIRONMENT}})
           echo "The environment is ${{ test }}"
