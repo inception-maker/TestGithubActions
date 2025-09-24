@@ -13,5 +13,5 @@ jobs:
           echo "The environment is ${{ env.ENVIRONMENT }}"
 
       - name: make uppercase
-        run: echo "The environment is ${{ env.ENVIRONMENT^^ }}"
+        run: echo "The environment is ${{ env.ENVIRONMENT }}^^"
     
