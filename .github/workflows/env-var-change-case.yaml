@@ -13,6 +13,8 @@ jobs:
           echo "The environment is ${{ env.ENVIRONMENT }}"
 
       - name: make uppercase
+        shell: bash
         run: |
-          test=$(echo "hello")
+          echo "test me"
+          test=$(echo "${{ env.ENVIRONMENT }}" | tr a-z A-Z)
           echo "The environment is ${{ test }}"
